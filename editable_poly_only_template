@@ -1,0 +1,4 @@
+command_panel_mode = getCommandPanelTaskMode()
+if selectedObjectIsEditablePoly() then (
+1
+)

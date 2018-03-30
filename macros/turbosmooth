@@ -1,0 +1,6 @@
+modPanel.setCurrentObject $.modifiers[$.modifiers[$.modifiers.count].name]
+modPanel.addModToSelection (turbosmooth ())
+$.modifiers[#TurboSmooth].isolineDisplay = on
+$.modifiers[#TurboSmooth].iterations = 3
+modPanel.setCurrentObject $.baseObject
+showEndResult = true

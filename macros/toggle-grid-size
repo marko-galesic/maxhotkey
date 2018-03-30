@@ -1,0 +1,7 @@
+gridSpacing = getGridSpacing()
+
+if gridSpacing == 10 then setupGrid 5 20
+else
+if gridSpacing == 5 then setupGrid 2 50
+  else
+    if gridSpacing == 2 then setupGrid 10 10

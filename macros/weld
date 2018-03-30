@@ -1,0 +1,2 @@
+$.weldThreshold = 0.01
+$.EditablePoly.weldFlaggedVertices ()

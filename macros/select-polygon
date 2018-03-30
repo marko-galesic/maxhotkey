@@ -1,0 +1,3 @@
+max modify mode
+modPanel.setCurrentObject $.baseObject
+subobjectLevel = 4

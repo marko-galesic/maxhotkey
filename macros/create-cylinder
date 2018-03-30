@@ -1,0 +1,2 @@
+fn plainCylinder n = n.heightsegs = 1
+startObjectCreation cylinder newNodeCallback:plainCylinder

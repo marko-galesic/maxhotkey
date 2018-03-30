@@ -1,0 +1,317 @@
+{
+  "q": {
+    "key": {
+      "macro": {
+        "name": "select-vertices",
+        "context": "selected-is-editable-poly"
+      }
+    },
+    "shift": {
+      "macro": {
+        "name": "select-edges",
+        "context": "selected-is-editable-poly"
+      }
+    },
+    "ctrl": {
+      "macro": {
+        "name": "select-polygon",
+        "context": "selected-is-editable-poly"
+      }
+    },
+    "alt": {
+      "macro": {
+        "name": "select-border",
+        "context": "selected-is-editable-poly"
+      }
+    },
+    "shift-alt": {
+      "macro": {
+        "name": "select-element",
+        "context": "selected-is-editable-poly"
+      }
+    },
+    "ctrl-alt": {
+      "macro": {
+        "name": "select-object",
+        "context": "selected-is-editable-poly"
+      }
+    }
+  },
+  "w": {
+    "key": {
+      "macro": {
+        "name": "convert-to-vertices",
+        "context": "selected-is-editable-poly"
+      }
+    },
+    "shift": {
+      "macro": {
+        "name": "convert-to-edges",
+        "context": "selected-is-editable-poly"
+      }
+    },
+    "ctrl": {
+      "macro": {
+        "name": "convert-to-faces",
+        "context": "selected-is-editable-poly"
+      }
+    }
+  },
+  "e": {
+    "key": {
+      "macro": {
+        "name": "snaps"
+      }
+    }
+  },
+  "No1": {
+    "key" : {
+      "macro": {
+        "name": "toggle-ui-clutter"
+      }
+    }
+  },
+  "No2": {
+    "key" : {
+      "macro": {
+        "name": "reload-macros"
+      }
+    }
+  },
+  "No3": {
+    "key" : {
+      "macro": {
+        "name": "customize-ui"
+      }
+    }
+  },
+  "No4": {
+    "key" : {
+      "macro": {
+        "name": "save-incremental"
+      }
+    }
+  },
+  "s": {
+    "key": {
+      "macro": {
+        "name": "make-planar-x"
+      }
+    },
+    "shift": {
+      "macro": {
+        "name": "make-planar-y"
+      }
+    },
+    "ctrl": {
+      "macro": {
+        "name": "make-planar-z"
+      }
+    }
+  },
+  "r": {
+    "key": {
+      "macro": {
+        "name": "loop",
+        "context": "selected-is-editable-poly"
+      }
+    },
+    "shift": {
+      "macro": {
+        "name": "ring",
+        "context": "selected-is-editable-poly"
+      }
+    }
+  },
+  "t": {
+    "key": {
+      "macro": {
+        "name": "select-base-object"
+      }
+    },
+    "shift": {
+      "macro": {
+        "name": "toggle-end-result"
+      }
+    }
+  },
+  "a": {
+    "key": {
+      "macro": {
+        "name": "move"
+      }
+    },
+    "shift": {
+      "macro": {
+        "name": "rotate"
+      }
+    },
+    "ctrl": {
+      "macro": {
+        "name": "scale"
+      }
+    }
+  },
+  "d": {
+    "key": {
+      "macro": {
+        "name": "symmetry-x-axis"
+      }
+    },
+    "shift": {
+      "macro": {
+        "name": "turbosmooth"
+      }
+    }
+  },
+  "f": {
+    "key": {
+      "macro": {
+        "name": "affect-pivot"
+      }
+    },
+    "shift": {
+      "macro": {
+        "name": "zoom-to-selected"
+      }
+    }
+  },
+  "g": {
+    "key": {
+      "macro": {
+        "name": "hide-selection"
+      }
+    },
+    "shift": {
+      "macro": {
+        "name": "hide-unselected"
+      }
+    },
+    "ctrl": {
+      "macro": {
+        "name": "invert-selection"
+      }
+    },
+    "alt": {
+      "macro": {
+        "name": "unhide-all"
+      }
+    }
+  },
+  "h": {
+    "key": {
+      "macro": {
+        "name": "toggle-grid-size"
+      }
+    }
+  },
+  "z": {
+    "key": {
+      "macro": {
+        "name": "undo"
+      }
+    },
+    "shift": {
+      "macro": {
+        "name": "redo"
+      }
+    }
+  },
+  "x": {
+    "key": {
+      "macro": {
+        "name": "detach"
+      }
+    }
+  },
+  "c": {
+    "key": {
+      "macro": {
+        "name": "cap",
+        "context": "selected-is-editable-poly"
+      }
+    },
+    "shift": {
+      "macro": {
+        "name": "connect",
+        "context": "selected-is-editable-poly"
+      }
+    },
+    "ctrl": {
+      "macro": {
+        "name": "cut",
+        "context": "selected-is-editable-poly"
+      }
+    },
+    "alt": {
+      "macro": {
+        "name": "bridge",
+        "context": "selected-is-editable-poly"
+      }
+    },
+    "shift-alt": {
+      "macro": {
+        "name": "duplicate"
+      }
+    },
+    "ctrl-alt": {
+      "macro": {
+        "name": "attach"
+      }
+    }
+  },
+  "b": {
+    "key": {
+      "macro": {
+        "name": "extrude",
+        "context": "selected-is-editable-poly"
+      }
+    },
+    "shift": {
+      "macro": {
+        "name": "bevel",
+        "context": "selected-is-editable-poly"
+      }
+    },
+    "ctrl": {
+      "macro": {
+        "name": "chamfer",
+        "context": "selected-is-editable-poly"
+      }
+    },
+    "alt": {
+      "macro": {
+        "name": "hinge",
+        "context": "selected-is-editable-poly"
+      }
+    },
+    "ctrl-shift": {
+      "macro": {
+        "name": "inset",
+        "context": "selected-is-editable-poly"
+      }
+    }
+  },
+  "n": {
+    "key": {
+      "macro": {
+        "name": "weld",
+        "context": "selected-is-editable-poly"
+      }
+    },
+    "shift": {
+      "macro": {
+        "name": "target-weld",
+        "context": "selected-is-editable-poly"
+      }
+    }
+  },
+  "v": {
+    "key": {
+      "macro": {
+        "name": "swift-loop",
+        "context": "selected-is-editable-poly"
+      }
+    }
+  }
+}

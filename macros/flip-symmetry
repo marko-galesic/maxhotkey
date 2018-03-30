@@ -1,0 +1,4 @@
+if $.modifiers[#Symmetry].flip then
+  $.modifiers[#Symmetry].flip = false
+else
+  $.modifiers[#Symmetry].flip = true

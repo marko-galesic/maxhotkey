@@ -1,0 +1,6 @@
+modPanel.addModToSelection (symmetry ())
+$.modifiers[#Symmetry].axis = 0
+$.modifiers[#Symmetry].flip = on
+$.modifiers[#Symmetry].threshold = 0.01
+modPanel.setCurrentObject $.baseObject
+showEndResult = true
