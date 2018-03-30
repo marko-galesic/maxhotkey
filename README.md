@@ -11,5 +11,6 @@ My workflow is:
 1. Figure out what I want in a macro script (look at the Maxscript listener, for example)
 2. Take whatever lines of Maxscript are doing the thing I want
 3. Create a new file in the "macros" directory
-4. Run the program
-5. Profit! (and reload hotkeys/bindings)
+4. Add the macro to the config.json somewhere
+5. Run the program
+6. Profit! (and reload hotkeys/bindings)
