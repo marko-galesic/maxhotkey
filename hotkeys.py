@@ -25,7 +25,7 @@ tree = ET.parse(BASE_KBDX)
 root = tree.getroot()
 
 
-def add_binding(name, pattern, key):
+def bind(name, pattern, key, remove_existing_bindings=True):
 
     new_node = ET.Element('shortcut')
 
@@ -44,10 +44,22 @@ def add_binding(name, pattern, key):
     else:
         fvirt_value = '3'
 
+    ascii_value_of_key = str(ord(key.upper()))
+
     new_node.attrib['actionID'] = name + "`DragAndDrop"
-    new_node.attrib['accleleratorKey'] = str(ord(key.upper()))
+    new_node.attrib['accleleratorKey'] = ascii_value_of_key
     new_node.attrib['fVirt'] = fvirt_value
     new_node.attrib['actionTableID'] = "647394"
+
+    if remove_existing_bindings:
+        remove_these = []
+
+        for child in root:
+            if child.attrib['fVirt'] == fvirt_value and child.attrib['accleleratorKey'] == ascii_value_of_key:
+                remove_these.append(child)
+
+        for child in remove_these:
+            root.remove(child)
 
     root.append(new_node)
 
@@ -114,7 +126,7 @@ for keyboard_key in hotkey_config.keys():
         if hot_key in hotkey_config[keyboard_key].keys():
             script_name = get_script_name(hot_key, keyboard_key)
 
-            add_binding(script_name, get_capitalized_hotkey_pattern(hot_key), keyboard_key[len(keyboard_key) - 1])
+            bind(script_name, get_capitalized_hotkey_pattern(hot_key), keyboard_key[len(keyboard_key) - 1])
 
             macro_name = hotkey_config[keyboard_key][hot_key]["macro"]["name"]
 
