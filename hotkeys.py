@@ -9,6 +9,7 @@ from PIL import ImageFont
 APP_DATA_DIRECTORY = 'C:/Users/CONRAD II/AppData/Local/Autodesk/3dsMax/2018 - 64bit/ENU'
 BASE_KBDX = 'C:/Users/CONRAD II/Desktop/MaxStartUI.kbdx'
 
+
 MACROS_DIRECTORY = APP_DATA_DIRECTORY + '/usermacros/'
 FILE_PREFIX = 'DragAndDrop'
 
@@ -38,6 +39,8 @@ def add_binding(name, pattern, key):
         fvirt_value = '7'
     elif pattern == 'ShiftAlt':
         fvirt_value = '23'
+    elif pattern == 'CtrlAlt':
+        fvirt_value = '27'
     else:
         fvirt_value = '3'
 
