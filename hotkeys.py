@@ -11,6 +11,7 @@ BASE_KBDX = 'C:/Users/CONRAD II/Desktop/MaxStartUI.kbdx'
 
 
 MACROS_DIRECTORY = APP_DATA_DIRECTORY + '/usermacros/'
+
 FILE_PREFIX = 'DragAndDrop'
 
 config = ConfigParser()
@@ -44,7 +45,7 @@ def bind(name, pattern, key, remove_existing_bindings=True):
     else:
         fvirt_value = '3'
 
-    ascii_value_of_key = str(ord(key.upper()))
+    ascii_value_of_key = str(ord(key.upper())) if "SPACE" != key.upper() else "32"
 
     new_node.attrib['actionID'] = name + "`DragAndDrop"
     new_node.attrib['accleleratorKey'] = ascii_value_of_key
@@ -123,10 +124,11 @@ keyboard_reference.text((2000, 1300), "CTRL+ALT", fill=(227, 47, 47), font=legen
 
 for keyboard_key in hotkey_config.keys():
     for hot_key in ["key", "shift", "ctrl", "alt", "shift-alt", "ctrl-alt"]:
+        current_location = locations[keyboard_key.lower()].pop(0)
         if hot_key in hotkey_config[keyboard_key].keys():
             script_name = get_script_name(hot_key, keyboard_key)
 
-            bind(script_name, get_capitalized_hotkey_pattern(hot_key), keyboard_key[len(keyboard_key) - 1])
+            bind(script_name, get_capitalized_hotkey_pattern(hot_key), keyboard_key[len(keyboard_key) - 1] if "No" in keyboard_key else keyboard_key)
 
             macro_name = hotkey_config[keyboard_key][hot_key]["macro"]["name"]
 
@@ -156,8 +158,7 @@ for keyboard_key in hotkey_config.keys():
             MACRO_TEMPLATE = get_template("macro_template").replace("body", macro_body).replace("hot_key", script_name)
 
             if keyboard_key.lower() in locations:
-                location = locations[keyboard_key.lower()].pop(0)
-                keyboard_reference.text((location[0], location[1]), macro_name, fill=(0, 0, 0), font=font)
+                keyboard_reference.text((current_location[0], current_location[1]), macro_name, fill=(0, 0, 0), font=font)
 
             with open(MACROS_DIRECTORY + macro_filename, "w") as macro_file:
 

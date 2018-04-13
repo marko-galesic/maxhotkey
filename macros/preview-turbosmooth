@@ -1,0 +1,16 @@
+previewTurbosmoothExists = false
+
+for m in $.modifiers where m.name == "preview-turbosmooth" do previewTurbosmoothExists = true
+
+if previewTurbosmoothExists != true then (
+	preview_turbosmooth = turbosmooth ()
+	preview_turbosmooth.isolineDisplay = on
+	preview_turbosmooth.iterations = 3
+	preview_turbosmooth.name = "preview-turbosmooth"
+
+	modPanel.addModToSelection (preview_turbosmooth)
+	modPanel.setCurrentObject $.baseObject
+	showEndResult = true
+) else (
+	for m in $.modifiers where m.name == "preview-turbosmooth" do deleteModifier $ m
+)

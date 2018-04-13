@@ -1,2 +1,3 @@
 actionMan.executeAction 0 "40264"  -- Expert Mode
 actionMan.executeAction 0 "50026"
+actionMan.executeAction 0 "407" -- Tools: Show Track Bar Toggle
