@@ -348,6 +348,16 @@
       "macro": {
         "name": "perspective"
       }
+    },
+    "ctrl": {
+      "macro": {
+        "name": "back"
+      }
+    },
+    "shift-alt": {
+      "macro": {
+        "name": "top"
+      }
     }
   }
 }
