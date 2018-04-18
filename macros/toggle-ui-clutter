@@ -1,3 +1,35 @@
-actionMan.executeAction 0 "40264"  -- Expert Mode
-actionMan.executeAction 0 "50026"
-actionMan.executeAction 0 "407" -- Tools: Show Track Bar Toggle
+viewportMaximized = NOT( viewport.NumViews > 1 )
+expertMode = cui.getExpertMode()
+timeSliderVisible = timeSlider.isVisible()
+
+
+if clutterToggle == false then (
+    if expertMode == false then (
+        actionMan.executeAction 0 "40264"  -- Expert Mode
+    )
+    if viewportMaximized == false then (
+        actionMan.executeAction 0 "50026"
+    )
+    if maxOps.trackBar.visible == false then (
+        maxOps.trackBar.visible = false
+    )
+    if timeSliderVisible == false then (
+        timeSlider.setVisible false
+    )
+    clutterToggle = true
+)
+else (
+    if expertMode then (
+        actionMan.executeAction 0 "40264"  -- Expert Mode
+    )
+    if viewportMaximized then (
+        actionMan.executeAction 0 "50026"
+    )
+    if maxOps.trackBar.visible then (
+        maxOps.trackBar.visible = false
+    )
+    if timeSliderVisible then (
+        timeSlider.setVisible true
+    )
+    clutterToggle = false
+)
