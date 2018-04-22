@@ -218,6 +218,11 @@
       "macro": {
         "name": "toggle-grid-size"
       }
+    },
+    "shift": {
+      "macro": {
+        "name": "toggle-grid"
+      }
     }
   },
   "z": {
@@ -357,6 +362,11 @@
     "shift-alt": {
       "macro": {
         "name": "top"
+      }
+    },
+    "ctrl-alt": {
+      "macro": {
+        "name": "front"
       }
     }
   }
