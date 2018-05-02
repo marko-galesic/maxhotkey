@@ -8,13 +8,13 @@
     },
     "shift": {
       "macro": {
-        "name": "select-edges",
+        "name": "select-polygon",
         "context": "selected-is-editable-poly"
       }
     },
     "ctrl": {
       "macro": {
-        "name": "select-polygon",
+        "name": "select-edges",
         "context": "selected-is-editable-poly"
       }
     },
