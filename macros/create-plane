@@ -1,5 +1,6 @@
 fn plainPlane n = (
-n.lengthsegs = 1
-n.widthsegs = 1
+    n.lengthsegs = 1
+    n.widthsegs = 1
 )
+
 startObjectCreation plane newNodeCallback:plainPlane
