@@ -1,13 +1,18 @@
 import json
 import xml.etree.ElementTree as ET
+import configparser
 from configparser import ConfigParser
 
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
 
-APP_DATA_DIRECTORY = 'C:/Users/CONRAD II/AppData/Local/Autodesk/3dsMax/2018 - 64bit/ENU'
-BASE_KBDX = 'C:/Users/CONRAD II/Desktop/MaxStartUI.kbdx'
+program_config = configparser.ConfigParser()
+
+program_config.read('program_configuration.ini')
+
+APP_DATA_DIRECTORY = program_config['directories']['app_data_directory']
+BASE_KBDX = program_config['directories']['base_kbdx']
 
 
 MACROS_DIRECTORY = APP_DATA_DIRECTORY + '/usermacros/'
