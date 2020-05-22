@@ -117,6 +117,7 @@ for key_location in config['locations'].keys():
 
 script_name = ''
 
+keyboard_reference.rectangle([(1950, 450), (2600,1500)], fill=(125,125,125))
 keyboard_reference.text((2000, 500), "SHIFT", fill=(227, 47, 47), font=legend)
 keyboard_reference.text((2000, 700), "CTRL", fill=(227, 47, 47), font=legend)
 keyboard_reference.text((2000, 900), "ALT", fill=(227, 47, 47), font=legend)
