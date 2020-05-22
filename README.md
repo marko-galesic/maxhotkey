@@ -1,16 +1,20 @@
 # maxhotkey
-Indefinitely: If you can get this to run, you get:
+Generates 3DS Max key bindings and map for macro scripts based off a JSON configuration.
 
-Generate macro scripts + macro -> hotkey binding file - all based off a config (config.json), generate keyboard image with the macros shown on the appropriate keys
+Inspired by [this post](https://polycount.com/discussion/82907/3ds-max-keyboard-shortcuts).
+### Adding a macro
+1. Create a new file in the `macros` directory and paste your MaxScript there.
+2. Replace an existing `macro`'s name in config.json with the new filename or create a new `macro` with a structure like:
+```    
+    <key>: {
+        "key": {
+          "macro": {
+            "name": "<your-macro-name>"
+          }
+        }
+    },
+```
+ Where `<key>` can be any lowercase letter from a-z. If `<key>` is a number, use "No\<number>".
 
-You will probably need to change a few of the constants I've defined in the program, unless your Windows user directory is also called 'CONRAD II'.
-
-If you use a key that's not used, yet, and you want to have your macro appear on the keyboard-layout.png, you'll need to add that key to the [locations] section in keys.cfg. You'll likely need to experiment with placement. Those locations are the initial starting point. Spacing is based off the size of the font (no clever coding, just a magic/constant number I've put into the code).
-
-My workflow is:
-1. Figure out what I want in a macro script (look at the Maxscript listener, for example)
-2. Take whatever lines of Maxscript are doing the thing I want
-3. Create a new file in the "macros" directory
-4. Add the macro to the config.json somewhere
-5. Run the program
-6. Profit! (and reload hotkeys/bindings)
+3. Add key location in keys.cfg to make hotkey appear on key map.
+4. Run `python maxhotkey.py`
