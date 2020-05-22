@@ -1,23 +1,19 @@
 import json
 import xml.etree.ElementTree as ET
-import configparser
+import configure
+
 from configparser import ConfigParser
 
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
 
-program_config = configparser.ConfigParser()
+PROGRAM_CONFIGURATION = "program_configuration.ini"
 
-program_config.read('program_configuration.ini')
-
-APP_DATA_DIRECTORY = program_config['directories']['app_data_directory']
-BASE_KBDX = program_config['directories']['base_kbdx']
-
-
+config = configure.get_configuration(PROGRAM_CONFIGURATION)
+APP_DATA_DIRECTORY = config['directories']['app_data_directory']
+BASE_KBDX = config['directories']['base_kbdx']
 MACROS_DIRECTORY = APP_DATA_DIRECTORY + '/usermacros/'
-
-FILE_PREFIX = 'DragAndDrop'
 
 config = ConfigParser()
 
