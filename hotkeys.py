@@ -4,6 +4,7 @@ import configure
 
 from configparser import ConfigParser
 
+from macro_writer import MacroWriter
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
@@ -16,6 +17,7 @@ BASE_KBDX = config['directories']['base_kbdx']
 MACROS_DIRECTORY = APP_DATA_DIRECTORY + '/usermacros/'
 
 config = ConfigParser()
+macro_writer = MacroWriter(APP_DATA_DIRECTORY + '/usermacros/', 'macro_template')
 
 hotkey_config = json.load(open('config.json'))
 config.read('keys.cfg')
@@ -155,17 +157,11 @@ for keyboard_key in hotkey_config.keys():
             else:
                 macro_body = macro
 
-            macro_filename = "DragAndDrop-" + script_name + ".mcr"
-
-            MACRO_TEMPLATE = get_template("macro_template").replace("body", macro_body).replace("hot_key", script_name)
-
             if keyboard_key.lower() in locations:
-                keyboard_reference.text((current_location[0], current_location[1]), macro_name, fill=(0, 0, 0), font=font)
+                keyboard_reference.text((current_location[0], current_location[1]), macro_name, fill=(0, 0, 0),
+                                        font=font)
 
-            with open(MACROS_DIRECTORY + macro_filename, "w") as macro_file:
-
-                for line in MACRO_TEMPLATE.split('\n'):
-                    macro_file.write(line + '\n')
+            macro_writer.write(script_name, macro_body)
 
 keyboard_img.save('keyboard-layout.png')
 tree.write(APP_DATA_DIRECTORY + '/en-US/UI/awesome.kbdx')
