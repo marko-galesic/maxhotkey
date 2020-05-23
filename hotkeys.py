@@ -1,9 +1,9 @@
 import json
 import xml.etree.ElementTree as ET
 import configure
+import file_util
 
 from configparser import ConfigParser
-
 from macro_writer import MacroWriter
 from PIL import Image
 from PIL import ImageDraw
@@ -17,7 +17,7 @@ BASE_KBDX = config['directories']['base_kbdx']
 MACROS_DIRECTORY = APP_DATA_DIRECTORY + '/usermacros/'
 
 config = ConfigParser()
-macro_writer = MacroWriter(APP_DATA_DIRECTORY + '/usermacros/', 'macro_template')
+macro_writer = MacroWriter('macros', APP_DATA_DIRECTORY + '/usermacros/', 'macro_template')
 
 hotkey_config = json.load(open('config.json'))
 config.read('keys.cfg')
@@ -126,6 +126,8 @@ keyboard_reference.text((2000, 900), "ALT", fill=(227, 47, 47), font=legend)
 keyboard_reference.text((2000, 1100), "SHIFT+ALT", fill=(227, 47, 47), font=legend)
 keyboard_reference.text((2000, 1300), "CTRL+ALT", fill=(227, 47, 47), font=legend)
 
+if_statement = file_util.file_as_string('if_statement')
+
 for keyboard_key in hotkey_config.keys():
     for hot_key in ["key", "shift", "ctrl", "alt", "shift-alt", "ctrl-alt"]:
         current_location = locations[keyboard_key.lower()].pop(0)
@@ -135,33 +137,11 @@ for keyboard_key in hotkey_config.keys():
             bind(script_name, get_capitalized_hotkey_pattern(hot_key), keyboard_key[len(keyboard_key) - 1] if "No" in keyboard_key else keyboard_key)
 
             macro_name = hotkey_config[keyboard_key][hot_key]["macro"]["name"]
-
-            macro = get_macro(hotkey_config[keyboard_key][hot_key]["macro"]["name"])
-            if_statement = get_template("if_statement")
-
-            macro_body = ""
-
-            if 'context' in hotkey_config[keyboard_key][hot_key]["macro"].keys():
-                context = hotkey_config[keyboard_key][hot_key]["macro"]["context"]
-                if type(context) == str:
-                    context = get_context(context)
-                if type(context) == list:
-                    for c in range(len(context)):
-                        context[c] = get_context(context[c])
-                    context = ' and '.join(context)
-
-                if_statement = if_statement.replace("${boolean}", context)
-                if_statement = if_statement.replace("${statement}", macro)
-
-                macro_body = if_statement
-            else:
-                macro_body = macro
+            macro_writer.write(hotkey_config[keyboard_key][hot_key]["macro"])
 
             if keyboard_key.lower() in locations:
-                keyboard_reference.text((current_location[0], current_location[1]), macro_name, fill=(0, 0, 0),
-                                        font=font)
-
-            macro_writer.write(script_name, macro_body)
+                keyboard_reference.text(
+                    (current_location[0], current_location[1]), macro_name, fill=(0, 0, 0), font=font)
 
 keyboard_img.save('keyboard-layout.png')
 tree.write(APP_DATA_DIRECTORY + '/en-US/UI/awesome.kbdx')
