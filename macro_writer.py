@@ -5,7 +5,11 @@ from os import path
 
 class MacroWriter:
 
-    def __init__(self, macros_directory, max_macros_directory, macro_template_file, if_statement='if_statement'):
+    def __init__(self,
+                 macros_directory,
+                 max_macros_directory,
+                 macro_template_file,
+                 if_statement='resources/if_statement'):
         self.if_statement = file_util.file_as_string(if_statement)
         self.context_cache = {}
         self.macros_directory = macros_directory
@@ -14,7 +18,7 @@ class MacroWriter:
 
     def get_context(self, context):
         if context not in self.context_cache:
-            self.context_cache[context] = file_util.file_as_string(context)
+            self.context_cache[context] = file_util.file_as_string('resources/' + context)
 
         return self.context_cache[context]
 

@@ -9,7 +9,7 @@ from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
 
-PROGRAM_CONFIGURATION = "program_configuration.ini"
+PROGRAM_CONFIGURATION = "resources/program_configuration.ini"
 
 config = configure.get_configuration(PROGRAM_CONFIGURATION)
 APP_DATA_DIRECTORY = config['directories']['app_data_directory']
@@ -17,14 +17,14 @@ BASE_KBDX = config['directories']['base_kbdx']
 MACROS_DIRECTORY = APP_DATA_DIRECTORY + '/usermacros/'
 
 config = ConfigParser()
-macro_writer = MacroWriter('macros', APP_DATA_DIRECTORY + '/usermacros/', 'macro_template')
+macro_writer = MacroWriter('macros', APP_DATA_DIRECTORY + '/usermacros/', 'resources/macro_template')
 
-hotkey_config = json.load(open('config.json'))
-config.read('keys.cfg')
-keyboard_img = Image.open('keyboard-layout_blank.png')
+hotkey_config = json.load(open('resources/config.json'))
+config.read('resources/keys.cfg')
+keyboard_img = Image.open('resources/keyboard-layout_blank.png')
 keyboard_reference = ImageDraw.Draw(keyboard_img)
-font = ImageFont.truetype("arial.ttf", size=20)
-legend = ImageFont.truetype("arial.ttf", size=100)
+font = ImageFont.truetype("resources/arial.ttf", size=20)
+legend = ImageFont.truetype("resources/arial.ttf", size=100)
 tree = ET.parse(BASE_KBDX)
 root = tree.getroot()
 
@@ -103,8 +103,6 @@ def get_script_name(hotkey, key):
     else:
         return key.capitalize()
 
-MACRO_TEMPLATE = get_template('macro_template')
-
 locations = {}
 
 for key_location in config['locations'].keys():
@@ -125,8 +123,6 @@ keyboard_reference.text((2000, 700), "CTRL", fill=(227, 47, 47), font=legend)
 keyboard_reference.text((2000, 900), "ALT", fill=(227, 47, 47), font=legend)
 keyboard_reference.text((2000, 1100), "SHIFT+ALT", fill=(227, 47, 47), font=legend)
 keyboard_reference.text((2000, 1300), "CTRL+ALT", fill=(227, 47, 47), font=legend)
-
-if_statement = file_util.file_as_string('if_statement')
 
 for keyboard_key in hotkey_config.keys():
     for hot_key in ["key", "shift", "ctrl", "alt", "shift-alt", "ctrl-alt"]:

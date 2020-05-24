@@ -18,7 +18,7 @@ class ProgramConfigurationTest(unittest.TestCase):
         os.remove('dummy')
 
     def test_configuration_present(self):
-        config = configure.get_configuration('test_config.ini')
+        config = configure.get_configuration('resources/test_config.ini')
 
         self.assertTrue(config['directories']['app_data_directory'], 'C:\\')
         self.assertTrue(config['directories']['base_kbdx'], 'C:\\')

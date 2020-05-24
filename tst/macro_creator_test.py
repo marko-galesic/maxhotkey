@@ -19,7 +19,7 @@ macro_with_multiple_contexts = {
 class MacroWriterTest(unittest.TestCase):
 
     def setUp(self):
-        self.macro_creator = MacroWriter('./', './', '../macro_template', '../if_statement')
+        self.macro_creator = MacroWriter('resources/', './', '../resources/macro_template', '../resources/if_statement')
 
     def test_create_default_macro(self):
         macro_body = self.macro_creator.generate_macro_body(default_macro)
@@ -38,7 +38,7 @@ class MacroWriterTest(unittest.TestCase):
 
     def test_macros_directory_doesnt_exist(self):
         file_util.file_as_string = Mock(return_value='')
-        macro_writer = MacroWriter('dummy_directory', 'dummy_template', '../if_statement')
+        macro_writer = MacroWriter('dummy_directory', 'dummy_template', '../resources/if_statement')
 
         with self.assertRaises(NotADirectoryError):
             macro_writer.write(default_macro)
@@ -46,8 +46,8 @@ class MacroWriterTest(unittest.TestCase):
     def test_macro_write(self):
         self.macro_creator.write(default_macro)
 
-        self.assertTrue(path.exists('./DragAndDrop-macro.mcr'), 'macro file should be created')
+        self.assertTrue(path.exists('resources/DragAndDrop-macro.mcr'), 'macro file should be created')
         self.assertEqual(
-            file_util.file_as_string('macro_test'),
-            file_util.file_as_string('DragAndDrop-macro.mcr')
+            file_util.file_as_string('resources/macro_test'),
+            file_util.file_as_string('resources/DragAndDrop-macro.mcr')
         )
