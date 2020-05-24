@@ -1,7 +1,8 @@
-import json
-import xml.etree.ElementTree as ET
 import configure
-import file_util
+import json
+import os
+import sys
+import xml.etree.ElementTree as ET
 
 from configparser import ConfigParser
 from macro_writer import MacroWriter
@@ -9,22 +10,23 @@ from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
 
-PROGRAM_CONFIGURATION = "resources/program_configuration.ini"
 
-config = configure.get_configuration(PROGRAM_CONFIGURATION)
+config = configure.get_configuration(os.path.join("resources", "program_configuration.ini"))
 APP_DATA_DIRECTORY = config['directories']['app_data_directory']
 BASE_KBDX = config['directories']['base_kbdx']
-MACROS_DIRECTORY = APP_DATA_DIRECTORY + '/usermacros/'
 
 config = ConfigParser()
-macro_writer = MacroWriter('macros', APP_DATA_DIRECTORY + '/usermacros/', 'resources/macro_template')
+macro_writer = MacroWriter(
+    "macros",
+    os.path.join(APP_DATA_DIRECTORY, "usermacros"),
+    os.path.join("resources", "macro_template"))
 
-hotkey_config = json.load(open('resources/config.json'))
-config.read('resources/keys.cfg')
-keyboard_img = Image.open('resources/keyboard-layout_blank.png')
+hotkey_config = json.load(open(os.path.join("resources", "config.json")))
+config.read(os.path.join("resources", "keys.cfg"))
+keyboard_img = Image.open(os.path.join("resources", "keyboard-layout_blank.png"))
 keyboard_reference = ImageDraw.Draw(keyboard_img)
-font = ImageFont.truetype("resources/arial.ttf", size=20)
-legend = ImageFont.truetype("resources/arial.ttf", size=100)
+font = ImageFont.truetype(os.path.join("resources", "arial.ttf"), size=20)
+legend = ImageFont.truetype(os.path.join("resources", "arial.ttf"), size=100)
 tree = ET.parse(BASE_KBDX)
 root = tree.getroot()
 
@@ -66,31 +68,6 @@ def bind(name, pattern, key, remove_existing_bindings=True):
             root.remove(child)
 
     root.append(new_node)
-
-
-def get_macro(file):
-    macro = ""
-    with open("macros/" + file) as f:
-        for line in f:
-            macro += line
-    return macro
-
-
-def get_context(file):
-    macro = ""
-    with open(file) as f:
-        for line in f:
-            macro += line
-    return macro
-
-
-def get_template(file):
-    template = ""
-    with open(file) as f:
-        for line in f:
-            template += line
-
-    return template
 
 
 def get_capitalized_hotkey_pattern(hotkey):

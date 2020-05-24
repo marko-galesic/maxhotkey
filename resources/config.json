@@ -114,6 +114,13 @@
       }
     }
   },
+  "No5": {
+    "key" : {
+      "macro": {
+        "name": "toggle-ui-clutter"
+      }
+    }
+  },
   "s": {
     "key": {
       "macro": {

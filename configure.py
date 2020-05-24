@@ -1,4 +1,6 @@
 import configparser
+import sys
+
 from os import path
 
 
@@ -19,8 +21,13 @@ def get_configuration(configuration_file):
             'app_data_directory': app_data_directory,
             'base_kbdx': base_kbdx_directory
         }
-        with open(configuration_file, 'w') as config:
-            program_config.write(config)
+
+        try:
+            with open(configuration_file, 'w') as config:
+                program_config.write(config)
+        except PermissionError:
+            print("Insufficient permissions to write " + configuration_file)
+            sys.exit()
     else:
         program_config.read(configuration_file)
 
