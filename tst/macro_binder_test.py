@@ -2,17 +2,17 @@ import unittest
 import xml.etree.ElementTree as ET
 
 from macro_binder import MacroBinderCreator
+from os import path
 
 
 class MacroBinderTest(unittest.TestCase):
 
     def setUp(self):
-        self.config = ET.parse("resources/test_binding_template.kbdx")
-        self.macro_binder = MacroBinderCreator(self.config.getroot())
+        self.macro_binder = MacroBinderCreator("./", path.join("resources", "test_binding_template.kbdx"))
 
     def test_default_key_binding(self):
-        self.macro_binder.bind("test-macro", "key", "a")
-        self.assertBindingValid("test-macro", "97", "3")
+        self.macro_binder.bind("a", "key")
+        self.assertBindingValid("A", "97", "3")
 
     def test_replace_key_binding(self):
         new_node = ET.Element('shortcut')
@@ -22,20 +22,20 @@ class MacroBinderTest(unittest.TestCase):
         new_node.attrib['fVirt'] = "3"
         new_node.attrib['actionTableID'] = "647394"
 
-        self.config.getroot().append(new_node)
+        self.macro_binder.key_bindings.getroot().append(new_node)
 
-        self.macro_binder.bind("test-macro", "key", "a")
+        self.macro_binder.bind("a", "key")
 
-        shortcut_count = sum(1 for _ in self.config.getiterator("shortcut"))
+        shortcut_count = sum(1 for _ in self.macro_binder.key_bindings.getiterator("shortcut"))
         self.assertTrue(shortcut_count, 1)
-        self.assertBindingValid("test-macro", "97", "3")
+        self.assertBindingValid("A", "97", "3")
 
     def test_combo_key_binding(self):
-        self.macro_binder.bind("test-macro", "CtrlShift", "a")
-        self.assertBindingValid("test-macro", "97", "15")
+        self.macro_binder.bind("a", "CtrlShift")
+        self.assertBindingValid("CtrlShift", "97", "15")
 
     def assertBindingValid(self, script_name, key, fvirt):
-        binding = self.config.getiterator("shortcut").pop()
+        binding = self.macro_binder.key_bindings.getiterator("shortcut").pop()
         self.assertTrue(binding.attrib['actionID'], script_name + "`DragAndDrop")
         self.assertTrue(binding.attrib['accleleratorKey'], key)
         self.assertTrue(binding.attrib['fVirt'], fvirt)

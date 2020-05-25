@@ -1,5 +1,7 @@
 import xml.etree.ElementTree as ET
 
+from os import path
+
 pattern_to_fvirt_value = {
     "Ctrl": "11",
     "Alt": "19",
@@ -12,8 +14,9 @@ pattern_to_fvirt_value = {
 
 class MacroBinderCreator:
 
-    def __init__(self, root):
-        self.root = root
+    def __init__(self, app_data_directory, base_kbdx):
+        self.app_data_directory = app_data_directory
+        self.key_bindings = ET.parse(base_kbdx)
 
     def bind(self, keyboard_key, key_combo, remove_existing_bindings=True):
         script_name = self.get_script_name(key_combo, keyboard_key)
@@ -36,14 +39,16 @@ class MacroBinderCreator:
         if remove_existing_bindings:
             remove_these = []
 
-            for child in self.root:
+            root = self.key_bindings.getroot()
+
+            for child in root:
                 if child.attrib['fVirt'] == fvirt_value and child.attrib['accleleratorKey'] == ascii_value_of_key:
                     remove_these.append(child)
 
             for child in remove_these:
-                self.root.remove(child)
+                root.remove(child)
 
-        self.root.append(new_node)
+        self.key_bindings.getroot().append(new_node)
 
     def get_capitalized_key_combo_pattern(self, key_combo):
         return ''.join([h.capitalize() for h in key_combo.split('-')])
@@ -53,3 +58,6 @@ class MacroBinderCreator:
             return self.get_capitalized_key_combo_pattern(key_combo) + key.capitalize()
         else:
             return key.capitalize()
+
+    def save_key_bindings(self):
+        self.key_bindings.write(path.join(self.app_data_directory, "en-US", "UI", "awesome.kbdx"))
