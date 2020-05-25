@@ -1,7 +1,5 @@
 import json
 import os
-import xml.etree.ElementTree as ET
-from configparser import ConfigParser
 
 from macro_binder import MacroBinderCreator
 from macro_writer import MacroWriter
@@ -13,9 +11,6 @@ config = configure.get_configuration(os.path.join("resources", "program_configur
 app_data_directory = config['directories']['app_data_directory']
 base_kbdx = config['directories']['base_kbdx']
 
-configDocument = ET.parse(base_kbdx)
-
-config = ConfigParser()
 macro_writer = MacroWriter(
     "macros",
     os.path.join(app_data_directory, "usermacros"),
@@ -33,11 +28,15 @@ for keyboard_key in hotkey_config.keys():
     for key_combo in ["key", "shift", "ctrl", "alt", "shift-alt", "ctrl-alt"]:
         if key_combo in hotkey_config[keyboard_key].keys():
             macro_binder.bind(keyboard_key, key_combo)
-            macro_name = hotkey_config[keyboard_key][key_combo]["macro"]["name"]
             macro_writer.write(hotkey_config[keyboard_key][key_combo]["macro"])
 
             if keyboard_key.lower() in keyboard_map.get_defined_keys():
-                keyboard_map.add(keyboard_key, macro_name)
+                keyboard_map.add(keyboard_key, hotkey_config[keyboard_key][key_combo]["macro"]["name"])
+            else:
+                print("Warning: " + hotkey_config[keyboard_key][key_combo]["macro"]["name"] +
+                      " is bound in 3DS Max, but not added to the keyboard map. " +
+                      "Please add an entry for" + keyboard_key + " in " + os.path.join("resources", "keys.cfg") +
+                      " for your macro to show on the map.")
 
 keyboard_map.save()
 macro_binder.save_key_bindings()
