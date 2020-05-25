@@ -1,8 +1,9 @@
-import unittest
-from unittest.mock import patch
-import configure
 import os
+import unittest
 from os import path
+from unittest.mock import patch
+
+import configure
 
 
 class ProgramConfigurationTest(unittest.TestCase):

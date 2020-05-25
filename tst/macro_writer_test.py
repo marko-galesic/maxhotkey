@@ -1,9 +1,9 @@
-import file_util
 import unittest
-
-from macro_writer import MacroWriter
 from os import path
 from unittest.mock import Mock
+
+import file_util
+from macro_writer import MacroWriter
 
 default_macro = {'name': "test-macro"}
 macro_with_a_context = {

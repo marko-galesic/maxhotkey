@@ -86,38 +86,31 @@
       }
     }
   },
-  "No1": {
+  "no1": {
     "key" : {
       "macro": {
         "name": "toggle-ui-clutter"
       }
     }
   },
-  "No2": {
+  "no2": {
     "key" : {
       "macro": {
         "name": "reload-macros"
       }
     }
   },
-  "No3": {
+  "no3": {
     "key" : {
       "macro": {
         "name": "customize-ui"
       }
     }
   },
-  "No4": {
+  "no4": {
     "key" : {
       "macro": {
         "name": "save-incremental"
-      }
-    }
-  },
-  "No5": {
-    "key" : {
-      "macro": {
-        "name": "toggle-ui-clutter"
       }
     }
   },

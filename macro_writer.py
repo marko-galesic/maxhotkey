@@ -1,7 +1,7 @@
-import file_util
 import sys
-
 from os import path
+
+import file_util
 
 
 class MacroWriter:
