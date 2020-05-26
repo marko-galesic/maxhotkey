@@ -1,6 +1,6 @@
-macroScript macro
+macroScript A
 	category:"DragAndDrop"
 	toolTip:""
 (
-1 2 3
+foo bar
 )

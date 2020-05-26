@@ -27,7 +27,7 @@ for keyboard_key in hotkey_config.keys():
     for key_combo in ["key", "shift", "ctrl", "alt", "shift-alt", "ctrl-alt"]:
         if key_combo in hotkey_config[keyboard_key].keys():
             macro_binder.bind(keyboard_key, key_combo)
-            macro_writer.write(hotkey_config[keyboard_key][key_combo]["macro"])
+            macro_writer.write(hotkey_config[keyboard_key][key_combo]["macro"], keyboard_key, key_combo)
 
             if keyboard_key.lower() in keyboard_map.get_defined_keys():
                 keyboard_map.add(keyboard_key, hotkey_config[keyboard_key][key_combo]["macro"]["name"])

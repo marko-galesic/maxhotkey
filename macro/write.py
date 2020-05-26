@@ -1,7 +1,13 @@
+import file_util
 import sys
+
+from macro.util import get_script_name
 from os import path
 
-import file_util
+"""
+Generates macro function files based on macro function bodies in macros directory and context (e.g. selected object is
+an editable poly), if configured.
+"""
 
 
 class MacroWriter:
@@ -43,13 +49,13 @@ class MacroWriter:
 
         return self.if_statement.replace("${boolean}", context).replace("${statement}", macro_body)
 
-    def write(self, macro):
-        name = macro['name']
+    def write(self, macro, key, key_combo):
+        script_name = get_script_name(key_combo, key)
         body = self.generate_macro_body(macro)
 
-        filename = "DragAndDrop-" + name + ".mcr"
+        filename = "DragAndDrop-" + script_name + ".mcr"
 
-        macro = self.macro_template.replace("body", body).replace("hot_key", name)
+        macro = self.macro_template.replace("body", body).replace("hot_key", script_name)
 
         if not path.exists(self.max_macros_directory):
             raise NotADirectoryError

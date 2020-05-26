@@ -52,15 +52,15 @@ class MacroWriterTest(unittest.TestCase):
                                    path.join(self.great_grandparent_directory, "resources", "if_statement"))
 
         with self.assertRaises(NotADirectoryError):
-            macro_writer.write(default_macro)
+            macro_writer.write(default_macro, "a", "key")
 
     def test_macro_write(self):
-        self.macro_creator.write(default_macro)
+        self.macro_creator.write(default_macro, "a", "key")
 
         self.assertTrue(
-            path.exists(path.join(self.grandparent_directory, "resources", "DragAndDrop-macro.mcr")),
+            path.exists(path.join(self.grandparent_directory, "resources", "DragAndDrop-A.mcr")),
             "macro file should be created")
         self.assertEqual(
             file_util.file_as_string(path.join(self.grandparent_directory, "resources", "macro_test")),
-            file_util.file_as_string(path.join(self.grandparent_directory, "resources", "DragAndDrop-macro.mcr"))
+            file_util.file_as_string(path.join(self.grandparent_directory, "resources", "DragAndDrop-A.mcr"))
         )

@@ -1,5 +1,6 @@
 import xml.etree.ElementTree as ET
 
+from macro.util import get_script_name, get_capitalized_key_combo_pattern
 from os import path
 
 pattern_to_fvirt_value = {
@@ -11,7 +12,12 @@ pattern_to_fvirt_value = {
     "CtrlAlt": "27"
 }
 
+"""
+Using a base KBDX (https://tinyurl.com/yayotz4a) file, creates & saves 3DS Max key bindings to 'awesome.kbdx', which
+gets stored in the 3DS Max UI directory.
 
+Appends new key bindings and overwrites existing key bindings.
+"""
 class MacroBinderCreator:
 
     def __init__(self, app_data_directory, base_kbdx):
@@ -19,9 +25,9 @@ class MacroBinderCreator:
         self.key_bindings = ET.parse(base_kbdx)
 
     def bind(self, keyboard_key, key_combo, remove_existing_bindings=True):
-        script_name = self.get_script_name(key_combo, keyboard_key)
+        script_name = get_script_name(key_combo, keyboard_key)
         key = keyboard_key[len(keyboard_key) - 1] if "no" in keyboard_key else keyboard_key
-        pattern = self.get_capitalized_key_combo_pattern(key_combo)
+        pattern = get_capitalized_key_combo_pattern(key_combo)
 
         new_node = ET.Element('shortcut')
 
@@ -49,15 +55,6 @@ class MacroBinderCreator:
                 root.remove(child)
 
         self.key_bindings.getroot().append(new_node)
-
-    def get_capitalized_key_combo_pattern(self, key_combo):
-        return ''.join([h.capitalize() for h in key_combo.split('-')])
-
-    def get_script_name(self, key_combo, key):
-        if key_combo != 'key':
-            return self.get_capitalized_key_combo_pattern(key_combo) + key.capitalize()
-        else:
-            return key.capitalize()
 
     def save_key_bindings(self):
         self.key_bindings.write(path.join(self.app_data_directory, "en-US", "UI", "awesome.kbdx"))
