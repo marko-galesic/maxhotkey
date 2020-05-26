@@ -1,7 +1,7 @@
+import configure
 import json
 import os
 
-import configure
 from keyboard_map import KeyBoardMapCreator
 from macro.bind import MacroBinderCreator
 from macro.write import MacroWriter
@@ -19,8 +19,7 @@ macro_binder = MacroBinderCreator(app_data_directory, base_kbdx)
 keyboard_map = KeyBoardMapCreator(
     os.path.join("resources", "keyboard-layout_blank.png"),
     os.path.join("resources", "keys.cfg"),
-    os.path.join("resources", "arial.ttf")
-)
+    os.path.join("resources", "arial.ttf"))
 
 hotkey_config = json.load(open(os.path.join("resources", "config.json")))
 
