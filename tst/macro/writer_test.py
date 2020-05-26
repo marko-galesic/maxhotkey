@@ -1,9 +1,11 @@
-import unittest
-from os import path
-from unittest.mock import Mock
-
 import file_util
-from macro_writer import MacroWriter
+import unittest
+import os
+
+from os import path
+from os.path import dirname
+from macro.write import MacroWriter
+from unittest.mock import Mock
 
 default_macro = {'name': "test-macro"}
 macro_with_a_context = {
@@ -19,7 +21,15 @@ macro_with_multiple_contexts = {
 class MacroWriterTest(unittest.TestCase):
 
     def setUp(self):
-        self.macro_creator = MacroWriter('resources/', './', '../resources/macro_template', '../resources/if_statement')
+        self.grandparent_directory = dirname(path.abspath(os.curdir))
+        self.great_grandparent_directory = dirname(dirname(path.abspath(os.curdir)))
+        self.macro_creator = MacroWriter(
+            path.join(self.grandparent_directory, "resources"),
+            path.join(self.grandparent_directory, "resources"),
+            path.join(self.grandparent_directory, "resources"),
+            path.join(self.great_grandparent_directory, "resources", "macro_template"),
+            path.join(self.great_grandparent_directory, "resources", "if_statement")
+        )
 
     def test_create_default_macro(self):
         macro_body = self.macro_creator.generate_macro_body(default_macro)
@@ -38,7 +48,8 @@ class MacroWriterTest(unittest.TestCase):
 
     def test_macros_directory_doesnt_exist(self):
         file_util.file_as_string = Mock(return_value='')
-        macro_writer = MacroWriter('dummy_directory', 'dummy_template', '../resources/if_statement')
+        macro_writer = MacroWriter('dummy_directory', 'dummy_directory', 'dummy_directory', 'dummy_template',
+                                   path.join(self.great_grandparent_directory, "resources", "if_statement"))
 
         with self.assertRaises(NotADirectoryError):
             macro_writer.write(default_macro)
@@ -46,8 +57,10 @@ class MacroWriterTest(unittest.TestCase):
     def test_macro_write(self):
         self.macro_creator.write(default_macro)
 
-        self.assertTrue(path.exists('resources/DragAndDrop-macro.mcr'), 'macro file should be created')
+        self.assertTrue(
+            path.exists(path.join(self.grandparent_directory, "resources", "DragAndDrop-macro.mcr")),
+            "macro file should be created")
         self.assertEqual(
-            file_util.file_as_string('resources/macro_test'),
-            file_util.file_as_string('resources/DragAndDrop-macro.mcr')
+            file_util.file_as_string(path.join(self.grandparent_directory, "resources", "macro_test")),
+            file_util.file_as_string(path.join(self.grandparent_directory, "resources", "DragAndDrop-macro.mcr"))
         )

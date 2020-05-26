@@ -9,17 +9,19 @@ class MacroWriter:
     def __init__(self,
                  macros_directory,
                  max_macros_directory,
+                 context_directory,
                  macro_template_file,
                  if_statement=path.join("resources", "if_statement")):
         self.if_statement = file_util.file_as_string(if_statement)
         self.context_cache = {}
+        self.context_directory = context_directory
         self.macros_directory = macros_directory
         self.max_macros_directory = max_macros_directory
         self.macro_template = file_util.file_as_string(macro_template_file)
 
     def get_context(self, context):
         if context not in self.context_cache:
-            self.context_cache[context] = file_util.file_as_string(path.join("resources", context))
+            self.context_cache[context] = file_util.file_as_string(path.join(self.context_directory, context))
 
         return self.context_cache[context]
 

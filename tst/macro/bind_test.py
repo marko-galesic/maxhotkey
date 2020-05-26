@@ -1,14 +1,14 @@
 import unittest
 import xml.etree.ElementTree as ET
-
-from macro_binder import MacroBinderCreator
 from os import path
+
+from macro.bind import MacroBinderCreator
 
 
 class MacroBinderTest(unittest.TestCase):
 
     def setUp(self):
-        self.macro_binder = MacroBinderCreator("./", path.join("resources", "test_binding_template.kbdx"))
+        self.macro_binder = MacroBinderCreator("./", path.join(path.pardir, "resources", "test_binding_template.kbdx"))
 
     def test_default_key_binding(self):
         self.macro_binder.bind("a", "key")

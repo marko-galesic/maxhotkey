@@ -1,11 +1,10 @@
 import json
 import os
 
-from macro_binder import MacroBinderCreator
-from macro_writer import MacroWriter
-from keyboard_map import KeyBoardMapCreator
-
 import configure
+from keyboard_map import KeyBoardMapCreator
+from macro.bind import MacroBinderCreator
+from macro.write import MacroWriter
 
 config = configure.get_configuration(os.path.join("resources", "program_configuration.ini"))
 app_data_directory = config['directories']['app_data_directory']
@@ -14,6 +13,7 @@ base_kbdx = config['directories']['base_kbdx']
 macro_writer = MacroWriter(
     "macros",
     os.path.join(app_data_directory, "usermacros"),
+    "resources",
     os.path.join("resources", "macro_template"))
 macro_binder = MacroBinderCreator(app_data_directory, base_kbdx)
 keyboard_map = KeyBoardMapCreator(
