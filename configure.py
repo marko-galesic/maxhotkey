@@ -1,3 +1,6 @@
+"""
+Configuration utility functions
+"""
 import configparser
 import sys
 
@@ -5,14 +8,22 @@ from os import path
 
 
 def get_configuration(configuration_file):
+    """
+     Checks for program configuration file and creates one, if it doesn't exist
+    :param configuration_file: INI filename
+    :return: dictionary of directories
+    """
+
     program_config = configparser.ConfigParser()
 
     if not path.exists(configuration_file):
         print("Initial setup")
         app_data_directory = \
-            input("3DS Max AppData directory (e.g. C:/Users/DummyUser/AppData/Local/Autodesk/3dsMax/2018 - 64bit/ENU): ")
+            input("3DS Max AppData directory " +
+                  "(e.g. C:/Users/DummyUser/AppData/Local/Autodesk/3dsMax/2018 - 64bit/ENU): ")
         while not path.exists(app_data_directory):
-            app_data_directory = input("Invalid directory - please enter a 3DS Max AppData directory: ")
+            app_data_directory = input("Invalid directory - " +
+                                       "please enter a 3DS Max AppData directory: ")
         base_kbdx_directory = input("Base KBDX directory (e.g. C:/MaxStartUI.kbdx): ")
         while not path.exists(base_kbdx_directory):
             base_kbdx_directory = input("Invalid directory - please enter a Base KBDX directory: ")

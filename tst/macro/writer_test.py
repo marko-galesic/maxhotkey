@@ -26,10 +26,7 @@ class MacroWriterTest(unittest.TestCase):
         self.macro_creator = MacroWriter(
             path.join(self.grandparent_directory, "resources"),
             path.join(self.grandparent_directory, "resources"),
-            path.join(self.grandparent_directory, "resources"),
-            path.join(self.great_grandparent_directory, "resources", "macro_template"),
-            path.join(self.great_grandparent_directory, "resources", "if_statement")
-        )
+            path.join(self.grandparent_directory, "resources"))
 
     def test_create_default_macro(self):
         macro_body = self.macro_creator.generate_macro_body(default_macro)
@@ -48,8 +45,7 @@ class MacroWriterTest(unittest.TestCase):
 
     def test_macros_directory_doesnt_exist(self):
         file_util.file_as_string = Mock(return_value='')
-        macro_writer = MacroWriter('dummy_directory', 'dummy_directory', 'dummy_directory', 'dummy_template',
-                                   path.join(self.great_grandparent_directory, "resources", "if_statement"))
+        macro_writer = MacroWriter('dummy_directory', 'dummy_directory', 'dummy_directory')
 
         with self.assertRaises(NotADirectoryError):
             macro_writer.write(default_macro, "a", "key")

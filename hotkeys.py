@@ -16,8 +16,7 @@ BASE_KBDX = PROGRAM_CONFIG['directories']['base_kbdx']
 MACRO_WRTIER = MacroWriter(
     "macros",
     os.path.join(APP_DATA_DIRECTORY, "usermacros"),
-    "resources",
-    os.path.join("resources", "macro_template"))
+    "resources")
 MACRO_BINDER = MacroBinderCreator(APP_DATA_DIRECTORY, BASE_KBDX)
 KEYBOARD_MAP = KeyBoardMapCreator(
     os.path.join("resources", "keyboard-layout_blank.png"),
@@ -44,4 +43,3 @@ for keyboard_key in HOTKEY_CONFIG.keys():
 
 KEYBOARD_MAP.save()
 MACRO_BINDER.save_key_bindings()
-

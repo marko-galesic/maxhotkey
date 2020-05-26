@@ -1,0 +1,6 @@
+macroScript hot_key
+	category:"DragAndDrop"
+	toolTip:""
+(
+body
+)
