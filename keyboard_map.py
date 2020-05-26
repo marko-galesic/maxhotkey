@@ -16,7 +16,7 @@ class KeyBoardMapCreator:
         self.keyboard_img = Image.open(keyboard_map_image)
         self.keyboard_reference = ImageDraw.Draw(self.keyboard_img)
         self.font = ImageFont.truetype(font, size=20)
-        legend = ImageFont.truetype(path.join("resources", "arial.ttf"), size=100)
+        legend = ImageFont.truetype(font, size=100)
 
         self.keyboard_reference.rectangle([(1950, 450), (2600, 1500)], fill=(125, 125, 125))
         self.keyboard_reference.text((2000, 500), "SHIFT", fill=(227, 47, 47), font=legend)

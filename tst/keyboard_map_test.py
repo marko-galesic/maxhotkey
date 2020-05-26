@@ -10,7 +10,7 @@ class KeyBoardMapCreatorTest(unittest.TestCase):
         keyboard_map_creator = KeyBoardMapCreator(
             path.join(path.pardir, "resources", "keyboard-layout_blank.png"),
             path.join("resources", "keys.cfg"),
-            path.join(path.pardir, "resources", "arial.ttf")
+            path.join(path.pardir, "resources", "AcariSans-Regular.ttf")
         )
         keyboard_map_creator.add("a", "my-macro")
         keyboard_map_creator.add("a", "my-other-macro")
