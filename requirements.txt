@@ -36,6 +36,6 @@ scp==0.10.2
 service-identity==16.0.0
 six==1.10.0
 Twisted==16.0.0
-urllib3==1.13.1
+urllib3==1.24.2
 watchdog==0.8.3
 zope.interface==4.1.3
